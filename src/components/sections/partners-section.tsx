@@ -25,9 +25,15 @@ export function PartnersSection() {
         </h2>
 
         <div className="mt-[clamp(30px,4vw,56px)] grid grid-cols-2 border-t border-line-strong lg:grid-cols-5">
-          {partners.items.map((partner) => (
-            <div
+          {partners.items.map((partner) => {
+            const Celula = partner.url ? "a" : "div";
+            const linkProps = partner.url
+              ? { href: partner.url, target: "_blank" as const, rel: "noopener", "aria-label": `${partner.name} no Instagram` }
+              : {};
+            return (
+            <Celula
               key={partner.name}
+              {...linkProps}
               data-stagger
               className="group flex min-h-[136px] items-center justify-center border-b border-line px-5 py-7 text-center transition-colors duration-300 hover:bg-surface-hover not-[:nth-child(2n+1)]:border-l lg:nth-[2n+1]:border-l lg:not-[:nth-child(5n+1)]:border-l lg:nth-[5n+1]:border-l-0"
             >
@@ -36,14 +42,14 @@ export function PartnersSection() {
                    (quadrado) a 4.44 (faixa larga); a altura é compensada por
                    proporção para igualar o peso visual dentro da mesma caixa. */
                 <span
-                  className="relative block w-full max-w-[150px]"
-                  style={{ height: partner.wide ? "2.5rem" : "4rem" }}
+                  className="relative block w-full max-w-[160px]"
+                  style={{ height: partner.wide ? "2.75rem" : partner.sparse ? "6.5rem" : "5.25rem" }}
                 >
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     fill
-                    sizes="150px"
+                    sizes="160px"
                     className="object-contain"
                   />
                 </span>
@@ -54,8 +60,9 @@ export function PartnersSection() {
                   {partner.name}
                 </span>
               )}
-            </div>
-          ))}
+            </Celula>
+            );
+          })}
         </div>
       </div>
     </RevealSection>

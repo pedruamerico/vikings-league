@@ -69,6 +69,8 @@ export type Award = {
   title: string;
   /** Pendente: o que cada premiação individual entrega. Vazio = não renderiza. */
   prize: string;
+  /** Foto do troféu. Vazia = o card mostra o ícone, como hoje. */
+  photo?: string;
 };
 
 /**
@@ -180,7 +182,7 @@ export const org = {
   /** Encurtado: numa landing de conversão os números provam mais que o texto. */
   paragraph:
     "Organização de esports de Pro Clubs / EA Sports FC, com elenco próprio e comunidade ativa. A Vikings League é a nossa seletiva para mapear e projetar talentos.",
-  followers: { value: "+15,6 mil", label: "SEGUIDORES NO INSTAGRAM" },
+  followers: { count: 18.8, value: "+18,8 mil", label: "SEGUIDORES NO INSTAGRAM" },
   cta: "GARANTIR MINHA VAGA",
   photo: {
     id: "elenco",
@@ -196,6 +198,9 @@ export const org = {
     year: "2024",
     by: "VKG_iranzera",
     role: "CEO da Vikings Team E-sports",
+    /** Pendente: foto do responsável. Vazia = só o texto de fundação. */
+    photo: "",
+    photoAlt: "VKG_iranzera, CEO da Vikings Team E-sports",
   },
   /** Pendente: quem narra as finais. */
   roster: "",
@@ -270,8 +275,12 @@ export type Partner = {
   name: string;
   /** Pendente: logo oficial. Vazio = renderiza só o nome. */
   logo: string;
+  /** Perfil do parceiro. Vazio = o card não vira link. */
+  url?: string;
   /** Logo em faixa larga (ratio > 2): recebe menos altura para igualar o peso. */
   wide?: boolean;
+  /** Arte com pouca tinta (o EK usa 18% da caixa): ganha altura extra. */
+  sparse?: boolean;
 };
 
 export const partners = {
@@ -279,16 +288,41 @@ export const partners = {
   titleLead: "Quem caminha",
   titleAccent: "com a gente",
   items: [
-    { name: "EK Uniformes", logo: "/images/partners/ek-uniformes.webp" },
-    { name: "Bradley Runners", logo: "/images/partners/bradley-runners.webp" },
-    { name: "Cartzen", logo: "/images/partners/cartzen.webp", wide: true },
-    { name: "Scout Clubs", logo: "/images/partners/scout-clubs.webp" },
+    {
+      name: "EK Uniformes",
+      logo: "/images/partners/ek-uniformes.webp",
+      sparse: true,
+      url: "https://www.instagram.com/ek.uniformes",
+    },
+    {
+      name: "Bradley Runners",
+      logo: "/images/partners/bradley-runners.webp",
+      url: "https://www.instagram.com/bradleyrunners",
+    },
+    {
+      name: "Cartzen",
+      logo: "/images/partners/cartzen.webp",
+      wide: true,
+      url: "https://www.instagram.com/cartzenloja",
+    },
+    {
+      name: "Scout Clubs",
+      logo: "/images/partners/scout-clubs.webp",
+      url: "https://www.instagram.com/scout_clubs",
+    },
     { name: "Andromeda Clubs TV", logo: "/images/partners/andromeda-clubs-tv.webp" },
-    { name: "Vikings das Coins", logo: "/images/partners/vikings-das-coins.webp", wide: true },
+    {
+      name: "Vikings das Coins",
+      logo: "/images/partners/vikings-das-coins.webp",
+      wide: true,
+      url: "https://www.instagram.com/vikingsdascoins",
+    },
     { name: "Forges Design", logo: "/images/partners/forges-design.webp", wide: true },
     { name: "Viaje com a Gente Sempre", logo: "" },
     { name: "Omuks Designer", logo: "" },
     { name: "Vikings League", logo: "" },
+    /** Pendente: logo do desenvolvedor. Sem ela, o card mostra só o nome. */
+    { name: "Pedro Américo", logo: "", url: "https://github.com/pedruamerico/" },
   ] satisfies Partner[],
 } as const;
 
@@ -370,7 +404,8 @@ export const about = {
   ] satisfies GalleryItem[],
   instagram: {
     label: "INSTAGRAM",
-    value: "+15,6 MIL",
+    count: 18.8,
+    value: "+18,8 MIL",
     caption: "seguidores acompanhando a Vikings Team E-sports",
     cta: "VER PERFIL",
   },
@@ -501,8 +536,18 @@ export const awards = {
     src: "/images/trofeu-artilheiro.webp",
   } satisfies PhotoSlot,
   items: [
-    { icon: "trophy", title: "Artilheiro", prize: "" },
-    { icon: "target", title: "Líder de assistências", prize: "" },
+    {
+      icon: "trophy",
+      title: "Artilheiro",
+      prize: "",
+      photo: "/images/trofeu-artilheiro.webp",
+    },
+    {
+      icon: "target",
+      title: "Líder de assistências",
+      prize: "",
+      photo: "/images/trofeu-assistencias.webp",
+    },
     { icon: "shield", title: "Melhor zagueiro", prize: "" },
     { icon: "hand", title: "Melhor goleiro", prize: "" },
   ] satisfies Award[],

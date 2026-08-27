@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/count-up";
@@ -34,16 +35,30 @@ export function OrgSection() {
           </p>
 
           {org.founded.year ? (
-            <p className="mt-4 max-w-[52ch] font-sans text-sm leading-[1.6] text-text-dim">
-              Fundada em {org.founded.year} por{" "}
-              <span className="font-bold text-text">{org.founded.by}</span>, {org.founded.role}.
-            </p>
+            <div className="mt-5 flex items-center gap-3.5">
+              {/* A foto entra quando existir; sem ela fica só a linha de texto. */}
+              {org.founded.photo ? (
+                <span className="relative block h-12 w-12 flex-none overflow-hidden rounded-full border border-line-strong">
+                  <Image
+                    src={org.founded.photo}
+                    alt={org.founded.photoAlt}
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </span>
+              ) : null}
+              <p className="max-w-[46ch] font-sans text-sm leading-[1.6] text-text-dim">
+                Fundada em {org.founded.year} por{" "}
+                <span className="font-bold text-text">{org.founded.by}</span>, {org.founded.role}.
+              </p>
+            </div>
           ) : null}
 
           <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap gap-x-[clamp(28px,5vw,64px)] gap-y-6">
             <div>
               <div className="font-display text-[clamp(30px,4.4vw,54px)] leading-[0.9] font-extrabold uppercase">
-                <CountUp value={15.6} prefix="+" decimals={1} suffix=" mil" />
+                <CountUp value={org.followers.count} prefix="+" decimals={1} suffix=" mil" />
               </div>
               <div className="mt-2 font-sans text-[10px] font-semibold tracking-[0.16em] text-text-dim">
                 {org.followers.label}

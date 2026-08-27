@@ -1,5 +1,5 @@
 import { Icon } from "@/components/ui/icon";
-import { ImageSlot } from "@/components/ui/image-slot";
+import Image from "next/image";
 import { RevealSection } from "@/components/ui/reveal-section";
 import { RevealWords } from "@/components/ui/reveal-words";
 import { awards } from "@/content/content";
@@ -27,37 +27,44 @@ export function AwardsSection() {
           />
         </h2>
 
-        <div className="mt-[clamp(30px,4vw,56px)] flex flex-wrap gap-[clamp(14px,2vw,22px)]">
-          {awards.photo.src ? (
-            <div data-stagger className="min-w-[min(100%,240px)] flex-[0_1_300px]">
-              <ImageSlot
-                src={awards.photo.src}
-                alt={awards.photo.alt}
-                aspectRatio="3/4"
-                sizes="(max-width: 900px) 100vw, 300px"
-              />
-            </div>
-          ) : null}
-
-          <div className="grid min-w-[min(100%,280px)] flex-[1_1_520px] grid-cols-2 gap-[clamp(14px,2vw,22px)]">
+        <div className="mt-[clamp(30px,4vw,56px)] grid grid-cols-2 gap-[clamp(14px,2vw,22px)] lg:grid-cols-4">
           {awards.items.map((award) => (
             <div
               key={award.title}
               data-stagger
               className="group relative flex min-h-[196px] items-end gap-4 overflow-hidden border border-line-strong px-5 py-[22px] transition-colors duration-300 hover:border-accent/45 hover:bg-surface-hover"
             >
-              <Icon
-                name={award.icon}
-                size={56}
-                strokeWidth={2.5}
-                className="flex-none self-end text-[rgba(46,123,255,0.9)] transition-transform duration-300 ease-out group-hover:-translate-y-1"
-              />
-              <span
-                className="pointer-events-none absolute right-[-64px] bottom-[-84px] vl-watermark transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2"
-                aria-hidden
-              >
-                <Icon name={award.icon} size={260} strokeWidth={1} />
-              </span>
+              {award.photo ? (
+                <>
+                  <Image
+                    src={award.photo}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                    aria-hidden
+                    className="object-cover opacity-45 transition-[opacity,transform] duration-500 ease-out group-hover:scale-[1.04] group-hover:opacity-60"
+                  />
+                  <span
+                    className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(11,14,19,0.94),rgba(11,14,19,0.35))]"
+                    aria-hidden
+                  />
+                </>
+              ) : (
+                <>
+                  <Icon
+                    name={award.icon}
+                    size={56}
+                    strokeWidth={2.5}
+                    className="flex-none self-end text-[rgba(46,123,255,0.9)] transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                  />
+                  <span
+                    className="pointer-events-none absolute right-[-64px] bottom-[-84px] vl-watermark transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2"
+                    aria-hidden
+                  >
+                    <Icon name={award.icon} size={260} strokeWidth={1} />
+                  </span>
+                </>
+              )}
               <span className="relative">
                 <span className="block font-display text-[clamp(24px,3.2vw,32px)] font-bold uppercase">
                   {award.title}
@@ -69,7 +76,6 @@ export function AwardsSection() {
               </span>
             </div>
           ))}
-          </div>
         </div>
       </div>
     </RevealSection>

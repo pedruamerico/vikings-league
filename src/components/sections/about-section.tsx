@@ -72,7 +72,7 @@ export function AboutSection() {
 
             <span className="flex flex-1 flex-col justify-center">
               <span className="block font-display text-[clamp(36px,4vw,52px)] leading-[0.9] whitespace-nowrap font-extrabold uppercase">
-                <CountUp value={15.6} prefix="+" decimals={1} suffix=" MIL" />
+                <CountUp value={about.instagram.count} prefix="+" decimals={1} suffix=" MIL" />
               </span>
               <span className="mt-4 block max-w-[24ch] text-[14px] leading-[1.55] text-text-dim">
                 {about.instagram.caption}
