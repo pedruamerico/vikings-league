@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { InstagramIcon } from "@/components/ui/instagram-icon";
 import { CountUp } from "@/components/ui/count-up";
 import { Icon } from "@/components/ui/icon";
-import { ImageSlot } from "@/components/ui/image-slot";
+import { MediaGallery } from "@/components/ui/media-gallery";
 import { RevealSection } from "@/components/ui/reveal-section";
 import { instagram } from "@/lib/links";
 import { about } from "@/content/content";
@@ -52,29 +52,16 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className="mt-[clamp(28px,4vw,52px)] grid grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-4">
-          {about.photos.map((photo) => (
-            <figure key={photo.id} data-stagger className="group relative m-0 overflow-hidden">
-              <ImageSlot
-                src={photo.src || undefined}
-                alt={photo.alt}
-                aspectRatio="3/4"
-                treatment="social"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                imageClassName="transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-              />
-              {photo.caption ? (
-                <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(11,14,19,0.92),transparent)] px-4 pt-10 pb-4 font-sans text-[11px] font-semibold tracking-[0.14em] text-text uppercase">
-                  {photo.caption}
-                </figcaption>
-              ) : null}
-            </figure>
-          ))}
+        {/* Galeria rola na horizontal; o card do Instagram fica fixo ao lado,
+            como âncora de prova social. Mais mídia aumenta a largura
+            rolável, não a altura da seção. */}
+        <div data-stagger className="mt-[clamp(28px,4vw,52px)] flex flex-col gap-[clamp(16px,2vw,24px)] lg:flex-row lg:items-stretch">
+          <MediaGallery items={[...about.gallery]} className="min-w-0 lg:flex-1" />
 
+          <div className="lg:w-[268px] lg:flex-none">
           <a
             {...instagram()}
-            data-stagger
-            className="group flex flex-col gap-8 border border-line-strong bg-bg-alt p-5 sm:aspect-3/4 sm:gap-0 transition-colors duration-300 hover:border-accent/50 hover:bg-surface-hover"
+            className="group flex h-full flex-col justify-between gap-8 border border-line-strong bg-bg-alt p-5 lg:gap-6 transition-colors duration-300 hover:border-accent/50 hover:bg-surface-hover"
           >
             <span className="flex items-center gap-2 font-sans text-[10px] font-semibold tracking-[0.14em] text-text-dim">
               <span className="grid place-items-center text-accent">
@@ -84,7 +71,7 @@ export function AboutSection() {
             </span>
 
             <span className="flex flex-1 flex-col justify-center">
-              <span className="block font-display text-[clamp(40px,5.6vw,68px)] leading-[0.88] font-extrabold uppercase">
+              <span className="block font-display text-[clamp(36px,4vw,52px)] leading-[0.9] whitespace-nowrap font-extrabold uppercase">
                 <CountUp value={15.6} prefix="+" decimals={1} suffix=" MIL" />
               </span>
               <span className="mt-4 block max-w-[24ch] text-[14px] leading-[1.55] text-text-dim">
@@ -103,6 +90,7 @@ export function AboutSection() {
               />
             </span>
           </a>
+          </div>
         </div>
       </div>
     </RevealSection>

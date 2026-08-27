@@ -71,6 +71,32 @@ export type Award = {
   prize: string;
 };
 
+/**
+ * Item da galeria horizontal. A união discriminada permite adicionar vídeo
+ * sem tocar no layout — o componente decide o que renderizar pelo `type`.
+ * A ordem do array é a ordem de exibição.
+ */
+export type GalleryItem =
+  | {
+      type: "image";
+      id: string;
+      src: string;
+      alt: string;
+      label?: string;
+      /** object-position, quando o enquadramento padrão corta algo importante. */
+      focus?: string;
+    }
+  | {
+      type: "video";
+      id: string;
+      src: string;
+      /** Frame exibido antes do play. Sem ele o card abre preto. */
+      poster: string;
+      alt: string;
+      label?: string;
+      focus?: string;
+    };
+
 export type PhotoSlot = {
   id: string;
   alt: string;
@@ -291,26 +317,57 @@ export const about = {
       description: "Convivência com jogadores competitivos.",
     },
   ] satisfies Pillar[],
-  photos: [
+  gallery: [
     {
-      id: "org-1",
-      alt: "Atleta anunciado pela Vikings Team E-sports com o uniforme oficial",
+      type: "image",
+      id: "atleta",
       src: "/images/atleta-uniforme.webp",
-      caption: "Anúncio de atleta",
+      alt: "Atleta anunciado pela Vikings Team E-sports com o uniforme oficial",
+      label: "Anúncio de atleta",
     },
     {
-      id: "org-2",
-      alt: "Atletas da Vikings em partida, de headset e controle em mãos",
+      type: "image",
+      id: "bastidores",
       src: "/images/atleta-transmissao.webp",
-      caption: "Bastidores de partida",
+      alt: "Atletas da Vikings em partida, de headset e controle em mãos",
+      label: "Bastidores de partida",
     },
     {
-      id: "org-3",
-      alt: "Comissão da Vikings reunida em preleção antes da partida",
+      type: "image",
+      id: "prelecao",
       src: "/images/equipe-huddle.webp",
-      caption: "Preleção da equipe",
+      alt: "Comissão da Vikings reunida em preleção antes da partida",
+      label: "Preleção da equipe",
     },
-  ] satisfies PhotoSlot[],
+    {
+      type: "image",
+      id: "libertadores",
+      src: "/images/elenco-libertadores.webp",
+      alt: "Elenco da Vikings com a bandeira da organização na Libertadores do Chile",
+      label: "Libertadores do Chile",
+    },
+    {
+      type: "image",
+      id: "trofeu-proleague",
+      src: "/images/trofeu-proleague.webp",
+      alt: "Troféu do ProLeague Americas Santiago 2026 com o escudo da Vikings",
+      label: "ProLeague Americas",
+    },
+    {
+      type: "image",
+      id: "patrocinadores",
+      src: "/images/elenco-patrocinadores.webp",
+      alt: "Elenco da Vikings reunido com a bandeira dos patrocinadores",
+      label: "Parceiros",
+    },
+    {
+      type: "image",
+      id: "elenco",
+      src: "/images/elenco-uniforme.webp",
+      alt: "Elenco da Vikings Team E-sports reunido com o uniforme oficial",
+      label: "Elenco",
+    },
+  ] satisfies GalleryItem[],
   instagram: {
     label: "INSTAGRAM",
     value: "+15,6 MIL",

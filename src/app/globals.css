@@ -113,6 +113,16 @@
     filter: grayscale(0.7) contrast(1.2) saturate(0.6);
   }
 
+  /* Esconde a barra de rolagem sem desabilitar o scroll: teclado, trackpad
+     e toque continuam funcionando. */
+  .vl-scroll-x {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .vl-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Foto de conteúdo social: mantém a cor — é o que dá autenticidade —
      com contraste ajustado para encaixar no fundo escuro. */
   .vl-photo-social {
