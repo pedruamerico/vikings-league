@@ -34,18 +34,18 @@ export function ScoutingSection() {
   return (
     <RevealSection
       id="s6"
-      className="border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(52px,7vw,116px)] vl-texture"
+      className="border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(44px,5.5vw,88px)] vl-texture"
     >
       <div className="mx-auto flex max-w-[1240px] flex-wrap gap-[clamp(26px,4vw,64px)]">
-        <div data-stagger className="min-w-[min(100%,260px)] flex-[1_1_260px]">
+        <div data-stagger className="min-w-[min(100%,300px)] flex-[1_1_420px]">
           <div className="mb-[18px] font-sans text-[10px] font-semibold tracking-[0.2em] text-text-dim">
             {scouting.eyebrow}
           </div>
-          <h2 className="max-w-[20ch] font-display text-[clamp(30px,5.4vw,72px)] leading-[0.95] font-extrabold text-balance uppercase">
+          <h2 className="max-w-[24ch] font-display text-[clamp(28px,4.2vw,56px)] leading-[0.95] font-extrabold text-balance uppercase">
             {scouting.titleLead} <span className="text-accent">{scouting.titleAccent}</span>{" "}
             {scouting.titleTail}
           </h2>
-          <p className="mt-[22px] max-w-[46ch] text-[clamp(15px,2vw,18px)] leading-[1.65] text-pretty text-text-body">
+          <p className="mt-[20px] max-w-[52ch] text-[clamp(15px,1.9vw,17px)] leading-[1.65] text-pretty text-text-body">
             {scouting.paragraph}
           </p>
 
@@ -54,7 +54,7 @@ export function ScoutingSection() {
             {scouting.chip}
           </div>
 
-          <div className="mt-[clamp(28px,4vw,44px)]">
+          <div className="mt-[clamp(24px,3vw,34px)]">
             <div className="font-sans text-[10px] font-semibold tracking-[0.16em] text-text-dim">
               {scouting.formation.label}
             </div>
@@ -64,7 +64,7 @@ export function ScoutingSection() {
               ))}
             </div>
 
-            <div className="mt-[18px] flex flex-col gap-1.5 font-sans text-[10px] font-semibold tracking-[0.1em] text-text-dim">
+            <div className="mt-[16px] flex flex-row flex-wrap gap-x-5 gap-y-1.5 font-sans text-[10px] font-semibold tracking-[0.1em] text-text-dim">
               {scouting.formation.summary.map((item) => (
                 <span key={item} className="whitespace-nowrap">
                   {item}
@@ -78,7 +78,7 @@ export function ScoutingSection() {
           </div>
         </div>
 
-        <div className="flex min-w-[min(100%,290px)] flex-[2_1_520px] flex-col gap-[clamp(16px,2.2vw,26px)]">
+        <div className="flex min-w-[min(100%,320px)] flex-[1.5_1_540px] flex-col gap-[clamp(16px,2.2vw,26px)]">
           {scouting.metrics.map((metric, i) => (
             <div
               key={metric.title}

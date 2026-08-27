@@ -6,7 +6,7 @@ export function CalendarSection() {
   return (
     <RevealSection
       id="s5"
-      className="border-b border-line bg-bg-alt py-[clamp(52px,7vw,116px)] vl-texture-wash"
+      className="border-b border-line bg-bg-alt py-[clamp(36px,4vw,64px)] vl-texture-wash"
     >
       <div className="mx-auto max-w-[1240px] px-[clamp(18px,3vw,44px)]">
         <div
@@ -30,14 +30,14 @@ export function CalendarSection() {
         </p>
       </div>
 
-      <div className="mt-[clamp(30px,4vw,56px)] flex flex-col border-y border-line-strong sm:flex-row sm:flex-nowrap">
+      <div className="mt-[clamp(24px,3vw,40px)] flex flex-col border-y border-line-strong sm:flex-row sm:flex-nowrap">
         {calendar.days.map((day, i) => (
           <div
             key={`${day.day}-${i}`}
             data-stagger
             className={cn(
-              "flex min-w-0 flex-[1_1_0] flex-col justify-between gap-[clamp(24px,3vw,40px)] px-[clamp(16px,2vw,26px)] py-[clamp(20px,2.4vw,30px)] transition-colors duration-[220ms] hover:bg-surface-hover",
-              "min-h-[clamp(210px,26vw,260px)] border-t border-line first:border-t-0 sm:border-t-0 sm:border-l",
+              "flex min-w-0 flex-[1_1_0] flex-col justify-between gap-[clamp(16px,2vw,26px)] px-[clamp(16px,2vw,26px)] py-[clamp(18px,2vw,24px)] transition-colors duration-[220ms] hover:bg-surface-hover",
+              "min-h-[clamp(160px,19vw,190px)] border-t border-line first:border-t-0 sm:border-t-0 sm:border-l",
               day.highlight
                 ? "border-l-white/28 bg-[linear-gradient(200deg,rgba(46,123,255,0.16),rgba(0,0,0,0)_72%)]"
                 : "sm:border-l-line",
@@ -59,7 +59,7 @@ export function CalendarSection() {
                 <span
                   data-clip
                   className={cn(
-                    "font-display text-[clamp(88px,15vw,210px)] leading-[0.82] font-extrabold tracking-[-0.01em] uppercase",
+                    "font-display text-[clamp(76px,11vw,150px)] leading-[0.82] font-extrabold tracking-[-0.01em] uppercase",
                     day.highlight && "text-accent-soft",
                   )}
                 >
@@ -74,7 +74,7 @@ export function CalendarSection() {
                   {day.month}
                 </span>
               </div>
-              <div className="mt-[clamp(14px,1.8vw,20px)] border-t border-line pt-[clamp(12px,1.6vw,16px)] font-display text-[clamp(20px,2.4vw,27px)] leading-[1.05] font-bold uppercase">
+              <div className="mt-[clamp(10px,1.4vw,14px)] border-t border-line pt-[clamp(10px,1.2vw,13px)] font-display text-[clamp(20px,2.4vw,27px)] leading-[1.05] font-bold uppercase">
                 {day.title}
               </div>
             </div>

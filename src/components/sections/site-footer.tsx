@@ -7,8 +7,8 @@ import { footer, site } from "@/content/content";
 export function SiteFooter() {
   return (
     <footer className="bg-bg-alt px-[clamp(18px,3vw,44px)] pt-[clamp(34px,5vw,64px)] pb-9 vl-texture">
-      <div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-[clamp(22px,4vw,56px)]">
-        <div className="min-w-[min(100%,260px)] flex-[1_1_300px]">
+      <div className="mx-auto grid max-w-[1240px] gap-[clamp(22px,4vw,48px)] sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+        <div>
           <div className="flex items-center gap-3">
             <Image
               src={site.logo.src}
@@ -27,7 +27,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <div className="flex-[0_1_190px]">
+        <div>
           <div className="mb-3.5 font-sans text-[10px] font-semibold tracking-[0.16em] text-marker-off">
             {footer.columns.competition.label}
           </div>
@@ -44,7 +44,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex-[0_1_210px]">
+        <div>
           <div className="mb-3.5 font-sans text-[10px] font-semibold tracking-[0.16em] text-marker-off">
             {footer.columns.contact.label}
           </div>
@@ -72,18 +72,22 @@ export function SiteFooter() {
         <span>{footer.season}</span>
       </div>
 
-      <div className="mx-auto mt-3.5 flex max-w-[1240px] flex-wrap gap-x-3.5 gap-y-1.5 border-t border-white/8 pt-3 font-sans text-xs text-text-faint">
+      <div className="mx-auto mt-3.5 flex max-w-[1240px] flex-wrap items-center gap-x-2.5 gap-y-1.5 border-t border-white/8 pt-3.5 font-sans text-[13px] text-text-dim">
         <span>{footer.credit.text}</span>
         {footer.credit.links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            target="_blank"
-            rel="noopener"
-            className="text-text-dim transition-colors hover:text-text-muted"
-          >
-            {link.label}
-          </a>
+          <span key={link.href} className="contents">
+            <span className="text-text-faint" aria-hidden>
+              ·
+            </span>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener"
+              className="text-text-body underline-offset-4 transition-colors hover:text-text hover:underline"
+            >
+              {link.label}
+            </a>
+          </span>
         ))}
       </div>
     </footer>

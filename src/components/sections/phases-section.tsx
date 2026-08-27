@@ -7,7 +7,7 @@ export function PhasesSection() {
   return (
     <RevealSection
       id="s4"
-      className="border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(52px,7vw,116px)] vl-texture"
+      className="border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(44px,5.5vw,88px)] vl-texture"
     >
       <div className="mx-auto max-w-[1240px]">
         <div

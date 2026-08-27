@@ -7,7 +7,7 @@ export function BenefitsSection() {
   return (
     <RevealSection
       id="s3"
-      className="border-b border-line bg-bg-alt px-[clamp(18px,3vw,44px)] py-[clamp(52px,7vw,116px)] vl-texture"
+      className="border-b border-line bg-bg-alt px-[clamp(18px,3vw,44px)] py-[clamp(44px,5.5vw,88px)] vl-texture"
     >
       <div className="mx-auto max-w-[1240px]">
         <div className="flex flex-wrap items-end justify-between gap-4">

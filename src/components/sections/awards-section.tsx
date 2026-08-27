@@ -10,7 +10,7 @@ export function AwardsSection() {
   return (
     <RevealSection
       id="s7"
-      className="border-b border-line bg-bg-alt px-[clamp(18px,3vw,44px)] py-[clamp(52px,7vw,116px)] vl-texture-wash"
+      className="border-b border-line bg-bg-alt px-[clamp(18px,3vw,44px)] py-[clamp(44px,5.5vw,88px)] vl-texture-wash"
     >
       <div className="mx-auto max-w-[1240px]">
         <div

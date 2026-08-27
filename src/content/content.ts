@@ -497,8 +497,8 @@ export const footer = {
   credit: {
     text: "Desenvolvido por Pedro Américo",
     links: [
-      { label: "github.com/pedruamerico", href: "https://github.com/pedruamerico/" },
-      { label: "linkedin.com/in/pedruamerico", href: "https://linkedin.com/in/pedruamerico" },
+      { label: "GitHub", href: "https://github.com/pedruamerico/" },
+      { label: "LinkedIn", href: "https://linkedin.com/in/pedruamerico" },
     ],
   },
 } as const;
