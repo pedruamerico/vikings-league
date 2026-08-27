@@ -123,9 +123,7 @@ export const nav = {
 } as const;
 
 export const header = {
-  vacancies: "120 VAGAS",
   cta: "GARANTIR VAGA",
-  price: "R$ 89,90",
   links: [
     { label: "A liga", href: "#s2" },
     { label: "Como funciona", href: "#s4" },

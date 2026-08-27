@@ -33,13 +33,6 @@ export function SiteHeader() {
       </nav>
 
       <div className="flex items-center gap-3">
-        <span className="hidden items-center gap-2.5 font-sans text-[10px] font-semibold tracking-[0.14em] whitespace-nowrap text-text-dim sm:flex">
-          {header.vacancies}
-          <span className="text-accent" aria-hidden>
-            /
-          </span>
-          <span className="text-accent-soft">{header.price}</span>
-        </span>
         <Button {...whatsapp()} size="sm">
           <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
           {header.cta}

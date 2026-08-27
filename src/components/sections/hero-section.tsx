@@ -39,7 +39,7 @@ export function HeroSection() {
   return (
     <section
       id="s1"
-      className="relative flex min-h-[clamp(600px,90vh,920px)] items-end justify-center overflow-hidden border-b border-line bg-bg"
+      className="relative flex min-h-[min(calc(100svh-56px),820px)] items-center justify-center overflow-hidden border-b border-line bg-bg"
     >
       <div className="pointer-events-none absolute inset-0 bg-bg vl-texture-hero" aria-hidden />
       <Image
@@ -52,22 +52,22 @@ export function HeroSection() {
         className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-auto w-[900px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-5 saturate-[1.8]"
       />
 
-      <div className="pointer-events-none relative z-2 mx-auto w-full max-w-[1100px] px-[clamp(18px,3vw,44px)] pt-[clamp(72px,11vh,132px)] pb-[clamp(32px,5vw,68px)] text-center">
+      <div className="vl-hero-content vl-hero-stack pointer-events-none relative z-2 mx-auto w-full max-w-[1100px] px-[clamp(18px,3vw,44px)] pt-[clamp(32px,5vh,72px)] pb-[clamp(32px,4vw,56px)] text-center">
         <Image
           src={site.logo.src}
           alt={site.logo.alt}
           width={196}
           height={196}
           priority
-          className="mx-auto block h-auto w-[clamp(120px,20vw,196px)]"
+          className="vl-hero-logo mx-auto block h-auto w-[clamp(72px,10vw,132px)]"
         />
 
-        <div className="mt-[clamp(14px,2vw,22px)] inline-flex items-center gap-[9px] font-sans text-[10px] font-semibold tracking-[0.18em] text-text-dim">
+        <div className="mt-[clamp(12px,1.6vw,18px)] inline-flex items-center gap-[9px] font-sans text-[10px] font-semibold tracking-[0.18em] text-text-dim">
           <span className="h-1.5 w-1.5 bg-accent vl-pulse" aria-hidden />
           {hero.eyebrow}
         </div>
 
-        <h1 className="mx-auto mt-[clamp(12px,2vw,20px)] max-w-[22ch] font-display text-[clamp(42px,8.4vw,112px)] leading-[0.86] font-extrabold text-balance uppercase">
+        <h1 className="mx-auto mt-[clamp(10px,1.6vw,16px)] max-w-[22ch] font-display text-[clamp(38px,7.2vw,96px)] leading-[0.88] font-extrabold text-balance uppercase">
           <RevealWords
             onMount
             delay={0.15}
@@ -75,11 +75,11 @@ export function HeroSection() {
           />
         </h1>
 
-        <p className="mx-auto mt-[clamp(16px,2.2vw,24px)] max-w-[56ch] text-[clamp(15px,1.9vw,18px)] leading-[1.6] text-pretty text-text-muted">
+        <p className="mx-auto mt-[clamp(14px,1.8vw,20px)] max-w-[56ch] text-[clamp(15px,1.9vw,18px)] leading-[1.6] text-pretty text-text-muted">
           {hero.paragraph}
         </p>
 
-        <div className="mx-auto mt-[clamp(24px,3.4vw,38px)] flex max-w-[720px] flex-wrap justify-center border border-white/16 bg-black/35">
+        <div className="mx-auto mt-[clamp(20px,2.6vw,30px)] flex max-w-[720px] flex-wrap justify-center border border-white/16 bg-black/35">
           <Stat
             value={hero.stats.vacancies.value}
             label={hero.stats.vacancies.label}
@@ -96,9 +96,9 @@ export function HeroSection() {
           <Stat value={hero.stats.duration.value} label={hero.stats.duration.label} />
         </div>
 
-        <div className="pointer-events-auto mt-[clamp(18px,2.6vw,28px)] flex flex-wrap justify-center gap-2.5">
+        <div className="pointer-events-auto mt-[clamp(16px,2.2vw,24px)] flex flex-wrap justify-center gap-2.5">
           <Magnetic className="flex-[0_1_250px]">
-            <Button {...whatsapp()} size="lg" className="group w-full">
+            <Button {...whatsapp()} size="lg" className="group w-full whitespace-nowrap">
               {hero.primaryCta}
               <ArrowRight
                 width={18}
@@ -109,8 +109,8 @@ export function HeroSection() {
               />
             </Button>
           </Magnetic>
-          <Magnetic className="flex-[0_1_220px]">
-            <Button {...whatsapp()} variant="outline" size="lg" className="w-full">
+          <Magnetic className="flex-[0_1_250px]">
+            <Button {...whatsapp()} variant="outline" size="lg" className="w-full whitespace-nowrap">
               <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
               {hero.secondaryCta}
             </Button>

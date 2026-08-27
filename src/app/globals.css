@@ -205,3 +205,34 @@
     transition: none !important;
   }
 }
+
+/* Telas baixas (notebooks 768px, iPhone SE): a composição do hero somava
+   mais que a viewport e os CTAs caíam abaixo da dobra. Comprime só o que
+   é respiro, preservando a escala do título. */
+@media (max-height: 800px) {
+  #s1 {
+    min-height: 0;
+  }
+  #s1 .vl-hero-content {
+    padding-top: clamp(16px, 2vh, 28px);
+    padding-bottom: clamp(20px, 2.5vh, 32px);
+  }
+  #s1 .vl-hero-logo {
+    width: clamp(60px, 8vh, 96px);
+  }
+  #s1 .vl-hero-stack > * + * {
+    margin-top: clamp(8px, 1.2vh, 14px);
+  }
+}
+
+@media (max-height: 700px) {
+  #s1 .vl-hero-logo {
+    width: clamp(52px, 7vh, 72px);
+  }
+  #s1 .vl-hero-stack > * + * {
+    margin-top: clamp(6px, 1vh, 10px);
+  }
+  #s1 h1 {
+    font-size: clamp(30px, 6vw, 46px);
+  }
+}
