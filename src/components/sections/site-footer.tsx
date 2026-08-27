@@ -1,0 +1,91 @@
+import Image from "next/image";
+import { MessageCircle } from "lucide-react";
+import { InstagramIcon } from "@/components/ui/instagram-icon";
+import { instagram, whatsapp } from "@/lib/links";
+import { footer, site } from "@/content/content";
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-bg-alt px-[clamp(18px,3vw,44px)] pt-[clamp(34px,5vw,64px)] pb-9 vl-texture">
+      <div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-[clamp(22px,4vw,56px)]">
+        <div className="min-w-[min(100%,260px)] flex-[1_1_300px]">
+          <div className="flex items-center gap-3">
+            <Image
+              src={site.logo.src}
+              alt={site.logo.alt}
+              width={42}
+              height={42}
+              className="h-[42px] w-[42px] object-contain"
+            />
+            <div>
+              <div className="font-display text-[19px] font-extrabold uppercase">{footer.org}</div>
+              <div className="mt-0.5 text-[13px] text-text-dim">{footer.league}</div>
+            </div>
+          </div>
+          <p className="mt-4 max-w-[40ch] text-sm leading-[1.6] text-text-dim">
+            {footer.description}
+          </p>
+        </div>
+
+        <div className="flex-[0_1_190px]">
+          <div className="mb-3.5 font-sans text-[10px] font-semibold tracking-[0.16em] text-marker-off">
+            {footer.columns.competition.label}
+          </div>
+          <div className="flex flex-col gap-2.5 text-sm">
+            {footer.columns.competition.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-text-body transition-colors hover:text-accent-soft"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-[0_1_210px]">
+          <div className="mb-3.5 font-sans text-[10px] font-semibold tracking-[0.16em] text-marker-off">
+            {footer.columns.contact.label}
+          </div>
+          <div className="flex flex-col gap-2.5 text-sm">
+            <a
+              {...instagram()}
+              className="inline-flex items-center gap-2 text-text-body transition-colors hover:text-accent-soft"
+            >
+              <InstagramIcon />
+              {footer.columns.contact.instagram}
+            </a>
+            <a
+              {...whatsapp()}
+              className="inline-flex items-center gap-2 text-accent-soft transition-colors hover:text-accent-bright"
+            >
+              <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
+              {footer.columns.contact.whatsapp}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto mt-[clamp(28px,4vw,44px)] flex max-w-[1240px] flex-wrap justify-between gap-2.5 border-t border-line pt-[18px] font-sans text-[10px] tracking-[0.12em] text-marker-off">
+        <span>{footer.copyright}</span>
+        <span>{footer.season}</span>
+      </div>
+
+      <div className="mx-auto mt-3.5 flex max-w-[1240px] flex-wrap gap-x-3.5 gap-y-1.5 border-t border-white/8 pt-3 font-sans text-xs text-text-faint">
+        <span>{footer.credit.text}</span>
+        {footer.credit.links.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noopener"
+            className="text-text-dim transition-colors hover:text-text-muted"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </footer>
+  );
+}

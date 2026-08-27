@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0B0E13;
+  --color-bg-alt: #0E1219;
+  --color-surface-hover: #141A23;
+  --color-text: #E8EDF5;
+  --color-text-muted: #C3CAD5;
+  --color-text-body: #B7BFCA;
+  --color-text-dim: #A8B0BC;
+  --color-text-faint: #7C8593;
+  --color-rail: #3A3F48;
+  --color-marker-off: #4C525E;
+  --color-accent: #2E7BFF;
+  --color-accent-hover: #4C90FF;
+  --color-accent-soft: #7FB0FF;
+  --color-accent-bright: #B9D3FF;
+
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-line-strong: rgba(255, 255, 255, 0.14);
+
+  --font-display: var(--font-big-shoulders), Oswald, Impact, sans-serif;
+  --font-sans: var(--font-space-grotesk), Helvetica, Arial, sans-serif;
+
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-bg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Textura padrão de seção — repetida em todas as seções do protótipo. */
+  .vl-texture {
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.03) 0 1px,
+      rgba(255, 255, 255, 0) 1px 10px
+    );
+  }
+
+  /* Textura do hero: mesma trama a 0.06 + halo azul. */
+  .vl-texture-hero {
+    background-image: repeating-linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.06) 0 1px,
+        rgba(255, 255, 255, 0) 1px 10px
+      ),
+      radial-gradient(78% 58% at 50% 20%, rgba(46, 123, 255, 0.18), rgba(0, 0, 0, 0) 72%);
+  }
+
+  /* Calendário e Premiação recebem o wash azul no topo, acima da textura. */
+  .vl-texture-wash {
+    background-image: radial-gradient(
+        120% 70% at 50% 0%,
+        rgba(46, 123, 255, 0.1),
+        rgba(0, 0, 0, 0) 62%
+      ),
+      repeating-linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.03) 0 1px,
+        rgba(255, 255, 255, 0) 1px 10px
+      );
+  }
+
+  /* Trama diagonal dupla do wrapper global. */
+  .vl-texture-page {
+    background-image: repeating-linear-gradient(
+        58deg,
+        rgba(226, 236, 255, 0.022) 0 1px,
+        rgba(0, 0, 0, 0) 1px 7px
+      ),
+      repeating-linear-gradient(
+        -58deg,
+        rgba(226, 236, 255, 0.015) 0 1px,
+        rgba(0, 0, 0, 0) 1px 11px
+      );
+  }
+
+  /* Slot sem foto: mesma trama, um pouco mais presente, para ler como
+     superfície intencional em vez de bloco preto. */
+  .vl-texture-slot {
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.05) 0 1px,
+      rgba(255, 255, 255, 0) 1px 10px
+    );
+  }
+
+  /* Foto institucional: dessaturada para conversar com a paleta. */
+  .vl-photo {
+    filter: grayscale(0.7) contrast(1.2) saturate(0.6);
+  }
+
+  /* Foto de conteúdo social: mantém a cor — é o que dá autenticidade —
+     com contraste ajustado para encaixar no fundo escuro. */
+  .vl-photo-social {
+    filter: contrast(1.08) saturate(1.05) brightness(0.94);
+  }
+
+  .vl-outline-numeral {
+    color: rgba(255, 255, 255, 0.05);
+    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.24);
+  }
+
+  .vl-outline-numeral-accent {
+    color: rgba(127, 176, 255, 0.12);
+    -webkit-text-stroke: 1.2px rgba(127, 176, 255, 0.5);
+  }
+
+  .vl-watermark {
+    color: rgba(127, 176, 255, 0.06);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@keyframes vlRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vlClip {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes vlPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Elementos observados começam invisíveis e só aparecem quando revelados.
+   Sem JS (ou com reduced-motion) o :not() garante que nada fique oculto. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-stagger][data-armed="true"],
+  [data-clip][data-armed="true"] {
+    opacity: 0;
+  }
+
+  [data-stagger][data-revealed="true"] {
+    animation: vlRise 0.6s var(--ease-reveal) both;
+    animation-delay: var(--vl-delay, 0ms);
+  }
+
+  [data-clip][data-revealed="true"] {
+    animation: vlClip 0.6s var(--ease-reveal) both;
+    animation-delay: var(--vl-delay, 0ms);
+  }
+}
+
+.vl-pulse {
+  animation: vlPulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
