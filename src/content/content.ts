@@ -177,6 +177,8 @@ export const org = {
   eyebrow: "A ORGANIZAÇÃO",
   titleLead: "Quem nós",
   titleAccent: "somos",
+  name: "Vikings Team E-sports",
+  category: "Organização de esports · Pro Clubs / EA Sports FC",
   /** Encurtado: numa landing de conversão os números provam mais que o texto. */
   paragraph:
     "Organização de esports de Pro Clubs / EA Sports FC, com elenco próprio e comunidade ativa. A Vikings League é a nossa seletiva para mapear e projetar talentos.",
@@ -195,10 +197,12 @@ export const org = {
   founded: {
     year: "2024",
     by: "VKG_iranzera",
-    role: "CEO da Vikings Team E-sports",
-    /** Pendente: foto do responsável. Vazia = só o texto de fundação. */
-    photo: "",
-    photoAlt: "VKG_iranzera, CEO da Vikings Team E-sports",
+    heading: "Fundador",
+    role: "CEO / Fundador",
+    paragraph:
+      "Fundador e CEO da Vikings Team E-sports desde 2024, VKG_iranzera está à frente da organização responsável pela Vikings League.",
+    photo: "/images/ceo-iranzera.webp",
+    photoAlt: "VKG_iranzera, fundador e CEO da Vikings Team E-sports",
     instagram: "https://www.instagram.com/vkg_iranzera",
   },
   /** Pendente: quem narra as finais. */
@@ -278,8 +282,6 @@ export type Partner = {
   url?: string;
   /** Logo em faixa larga (ratio > 2): recebe menos altura para igualar o peso. */
   wide?: boolean;
-  /** Arte com pouca tinta (o EK usa 18% da caixa): ganha altura extra. */
-  sparse?: boolean;
 };
 
 export const partners = {
@@ -289,8 +291,7 @@ export const partners = {
   items: [
     {
       name: "EK Uniformes",
-      logo: "/images/partners/ek-uniformes.webp",
-      sparse: true,
+      logo: "/images/partners/ek-uniformes-v2.webp",
       url: "https://www.instagram.com/ek.uniformes",
     },
     {

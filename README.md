@@ -45,10 +45,9 @@ seção correspondente degrada sem eles, sem placeholder inventado.
 | Campo | Onde | Efeito hoje |
 |---|---|---|
 | `config.whatsappUrl` | `content.ts` | **Bloqueante** — os 7 CTAs renderizam inertes |
-| `org.photo.src` | Quem nós somos | Slot texturizado no lugar da foto |
 | `about.photos[].src` | A liga (3 fotos) | Slots texturizados |
 | `awards.items[].prize` | Premiação | Card sem a linha do prêmio |
-| `org.founded` / `roster` / `competitions` | Quem nós somos | Não renderizam |
+| `org.roster` / `competitions` | Quem nós somos | Não renderizam |
 
 Tratamento obrigatório das fotos oficiais (já aplicado pelo `ImageSlot` quando
 há `src`): `grayscale(0.7) contrast(1.2) saturate(0.6)` + overlay `#2E7BFF` em

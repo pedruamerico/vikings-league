@@ -43,7 +43,7 @@ export function PartnersSection() {
                    proporção para igualar o peso visual dentro da mesma caixa. */
                 <span
                   className="relative block w-full max-w-[160px]"
-                  style={{ height: partner.wide ? "2.75rem" : partner.sparse ? "6.5rem" : "5.25rem" }}
+                  style={{ height: partner.wide ? "2.75rem" : "5.25rem" }}
                 >
                   <Image
                     src={partner.logo}
