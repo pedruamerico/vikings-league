@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { InstagramIcon } from "@/components/ui/instagram-icon";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/count-up";
@@ -35,23 +36,42 @@ export function OrgSection() {
           </p>
 
           {org.founded.year ? (
-            <div className="mt-5 flex items-center gap-3.5">
-              {/* A foto entra quando existir; sem ela fica só a linha de texto. */}
+            /* Card do responsável: foto ao lado do nome, Instagram embaixo.
+               Sem a foto o card continua válido, só com o texto. */
+            <div className="mt-6 flex items-center gap-4 border border-line-strong bg-bg/40 p-4">
               {org.founded.photo ? (
-                <span className="relative block h-12 w-12 flex-none overflow-hidden rounded-full border border-line-strong">
+                <span className="relative block h-16 w-16 flex-none overflow-hidden border border-line-strong">
                   <Image
                     src={org.founded.photo}
                     alt={org.founded.photoAlt}
                     fill
-                    sizes="48px"
+                    sizes="64px"
                     className="object-cover"
                   />
                 </span>
               ) : null}
-              <p className="max-w-[46ch] font-sans text-sm leading-[1.6] text-text-dim">
-                Fundada em {org.founded.year} por{" "}
-                <span className="font-bold text-text">{org.founded.by}</span>, {org.founded.role}.
-              </p>
+
+              <div className="min-w-0">
+                <div className="font-sans text-[10px] font-semibold tracking-[0.16em] text-text-dim uppercase">
+                  Fundada em {org.founded.year}
+                </div>
+                <div className="mt-1 font-display text-[clamp(19px,2vw,24px)] leading-[1.05] font-bold uppercase">
+                  {org.founded.by}
+                </div>
+                <div className="mt-0.5 font-sans text-[13px] text-text-dim">{org.founded.role}</div>
+
+                {org.founded.instagram ? (
+                  <a
+                    href={org.founded.instagram}
+                    target="_blank"
+                    rel="noopener"
+                    className="mt-2 inline-flex items-center gap-1.5 font-sans text-[12px] font-semibold text-accent-soft transition-colors hover:text-accent-bright"
+                  >
+                    <InstagramIcon size={14} />
+                    @vkg_iranzera
+                  </a>
+                ) : null}
+              </div>
             </div>
           ) : null}
 

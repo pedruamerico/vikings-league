@@ -69,8 +69,6 @@ export type Award = {
   title: string;
   /** Pendente: o que cada premiação individual entrega. Vazio = não renderiza. */
   prize: string;
-  /** Foto do troféu. Vazia = o card mostra o ícone, como hoje. */
-  photo?: string;
 };
 
 /**
@@ -201,6 +199,7 @@ export const org = {
     /** Pendente: foto do responsável. Vazia = só o texto de fundação. */
     photo: "",
     photoAlt: "VKG_iranzera, CEO da Vikings Team E-sports",
+    instagram: "https://www.instagram.com/vkg_iranzera",
   },
   /** Pendente: quem narra as finais. */
   roster: "",
@@ -321,8 +320,6 @@ export const partners = {
     { name: "Viaje com a Gente Sempre", logo: "" },
     { name: "Omuks Designer", logo: "" },
     { name: "Vikings League", logo: "" },
-    /** Pendente: logo do desenvolvedor. Sem ela, o card mostra só o nome. */
-    { name: "Pedro Américo", logo: "", url: "https://github.com/pedruamerico/" },
   ] satisfies Partner[],
 } as const;
 
@@ -536,18 +533,8 @@ export const awards = {
     src: "/images/trofeu-artilheiro.webp",
   } satisfies PhotoSlot,
   items: [
-    {
-      icon: "trophy",
-      title: "Artilheiro",
-      prize: "",
-      photo: "/images/trofeu-artilheiro.webp",
-    },
-    {
-      icon: "target",
-      title: "Líder de assistências",
-      prize: "",
-      photo: "/images/trofeu-assistencias.webp",
-    },
+    { icon: "trophy", title: "Artilheiro", prize: "" },
+    { icon: "target", title: "Líder de assistências", prize: "" },
     { icon: "shield", title: "Melhor zagueiro", prize: "" },
     { icon: "hand", title: "Melhor goleiro", prize: "" },
   ] satisfies Award[],
