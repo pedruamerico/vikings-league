@@ -323,7 +323,7 @@ export const partners = {
       name: "Pedro Américo",
       logo: "/images/pedro-americo-logo.svg",
       wide: true,
-      url: "https://linkedin.com/in/pedruamerico",
+      url: "https://www.pedroamerico.com",
     },
     { name: "Vikings League", logo: "/images/escudo-vikings.webp" },
   ] satisfies Partner[],
