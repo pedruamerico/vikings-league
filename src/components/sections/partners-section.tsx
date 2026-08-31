@@ -28,7 +28,12 @@ export function PartnersSection() {
           {partners.items.map((partner) => {
             const Celula = partner.url ? "a" : "div";
             const linkProps = partner.url
-              ? { href: partner.url, target: "_blank" as const, rel: "noopener", "aria-label": `${partner.name} no Instagram` }
+              ? {
+                  href: partner.url,
+                  target: "_blank" as const,
+                  rel: "noopener",
+                  "aria-label": `Visitar ${partner.name}`,
+                }
               : {};
             return (
             <Celula

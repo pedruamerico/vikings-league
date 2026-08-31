@@ -73,6 +73,13 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto mt-3.5 flex max-w-[1240px] flex-wrap items-center gap-x-2.5 gap-y-1.5 border-t border-white/8 pt-3.5 font-sans text-[13px] text-text-dim">
+        <Image
+          src="/images/pedro-americo-logo.svg"
+          alt=""
+          width={46}
+          height={29}
+          className="h-auto w-[46px] opacity-80"
+        />
         <span>{footer.credit.text}</span>
         {footer.credit.links.map((link) => (
           <span key={link.href} className="contents">

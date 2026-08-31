@@ -319,8 +319,13 @@ export const partners = {
     },
     { name: "Forges Design", logo: "/images/partners/forges-design.webp", wide: true },
     { name: "Viaje com a Gente Sempre", logo: "" },
-    { name: "Omuks Designer", logo: "" },
-    { name: "Vikings League", logo: "" },
+    {
+      name: "Pedro Américo",
+      logo: "/images/pedro-americo-logo.svg",
+      wide: true,
+      url: "https://linkedin.com/in/pedruamerico",
+    },
+    { name: "Vikings League", logo: "/images/escudo-vikings.webp" },
   ] satisfies Partner[],
 } as const;
 
