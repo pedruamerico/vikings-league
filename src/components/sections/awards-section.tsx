@@ -44,13 +44,13 @@ export function AwardsSection() {
             <div
               key={award.title}
               data-stagger
-              className="group relative flex min-h-[196px] items-end gap-4 overflow-hidden border border-line-strong px-5 py-[22px] transition-colors duration-300 hover:border-accent/45 hover:bg-surface-hover"
+              className="group relative flex min-h-[156px] flex-col items-start justify-end gap-2.5 overflow-hidden border border-line-strong px-3 py-4 transition-colors duration-300 hover:border-accent/45 hover:bg-surface-hover sm:min-h-[196px] sm:flex-row sm:items-end sm:justify-start sm:gap-4 sm:px-5 sm:py-[22px]"
             >
               <Icon
                 name={award.icon}
-                size={56}
+                size={48}
                 strokeWidth={2.5}
-                className="flex-none self-end text-[rgba(46,123,255,0.9)] transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                className="h-12 w-12 flex-none text-[rgba(46,123,255,0.9)] transition-transform duration-300 ease-out group-hover:-translate-y-1 sm:h-14 sm:w-14 sm:self-end"
               />
               <span
                 className="pointer-events-none absolute right-[-64px] bottom-[-84px] vl-watermark transition-transform duration-500 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2"
@@ -59,7 +59,7 @@ export function AwardsSection() {
                 <Icon name={award.icon} size={260} strokeWidth={1} />
               </span>
               <span className="relative">
-                <span className="block font-display text-[clamp(24px,3.2vw,32px)] font-bold uppercase">
+                <span className="block font-display text-xl leading-[0.95] font-bold uppercase sm:text-[clamp(24px,3.2vw,32px)]">
                   {award.title}
                 </span>
                 {/* Prêmio ainda não definido: a linha só existe quando houver valor. */}

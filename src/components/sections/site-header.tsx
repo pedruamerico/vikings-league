@@ -16,7 +16,7 @@ export function SiteHeader() {
           priority
           className="h-8 w-8 flex-none object-contain"
         />
-        <span className="truncate font-display text-lg font-extrabold tracking-[0.03em] uppercase">
+        <span className="hidden font-display text-lg font-extrabold tracking-[0.03em] uppercase min-[400px]:inline">
           {site.name}
         </span>
       </div>
@@ -33,7 +33,7 @@ export function SiteHeader() {
       </nav>
 
       <div className="flex items-center gap-3">
-        <Button {...whatsapp()} size="sm">
+        <Button {...whatsapp()} size="sm" className="whitespace-nowrap max-[399px]:px-3">
           <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
           {header.cta}
         </Button>
