@@ -106,16 +106,8 @@ export type PhotoSlot = {
   caption?: string;
 };
 
-/**
- * O número vai no formato E.164 sem símbolos, como o wa.me exige.
- * A mensagem pré-preenchida chega junto com o contato: enquanto a inscrição
- * é atendida manualmente, ela identifica de onde veio o lead.
- */
-const WHATSAPP_NUMBER = "5512996241211";
-const WHATSAPP_MESSAGE = "Olá! Quero garantir minha vaga na Vikings League.";
-
 export const config = {
-  whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
+  whatsappUrl: "https://chat.whatsapp.com/C0q8uv7gvya9yZKglSUbuv?s=cl&p=a&mlu=0&ilr=0",
   instagramUrl: "https://www.instagram.com/vikingsteamesports/",
   showPrice: true,
 } as const;
