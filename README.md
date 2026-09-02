@@ -1,13 +1,14 @@
 # Vikings League
 
 Landing page de divulgação da **Vikings League**, seletiva competitiva de
-Pro Clubs / EA Sports FC da Vikings Team E-sports. Página estática, rota única,
-com conversão para o WhatsApp da organização.
+Pro Clubs / EA Sports FC da Vikings Team E-sports. A inscrição envia os dados
+ao Supabase e libera o grupo da organização somente depois do registro.
 
 ## Stack
 
 - Next.js 16 (App Router) + TypeScript
-- Tailwind CSS v4 — tokens em `@theme` dentro de [globals.css](src/app/globals.css)
+- Supabase Database e Storage
+- Tailwind CSS v4, com tokens em `@theme` dentro de [globals.css](src/app/globals.css)
 - `lucide-react` para ícones
 - Fontes via `next/font` (Big Shoulders + Space Grotesk), self-hosted
 
@@ -21,17 +22,32 @@ npm run start
 npm run lint
 ```
 
+Variáveis server-side obrigatórias:
+
+```text
+SUPABASE_URL
+SUPABASE_SECRET_KEY
+SUPABASE_REGISTRATION_PHOTOS_BUCKET
+WHATSAPP_GROUP_URL
+NEXT_PUBLIC_TURNSTILE_SITE_KEY
+TURNSTILE_SECRET_KEY
+```
+
+Somente `NEXT_PUBLIC_TURNSTILE_SITE_KEY` pode ser exposta ao navegador.
+
 ## Estrutura
 
 ```
 src/
   app/page.tsx              rota única, monta as seções na ordem
+  app/api/registrations/    valida, envia a foto e persiste a inscrição
   app/globals.css           design tokens, texturas e keyframes
   content/content.ts        todo o conteúdo textual e datas (fonte única)
   components/sections/      uma seção = um componente
   components/ui/            button, icon, image-slot, reveal-section
   hooks/use-reveal.ts       reveal on scroll (IntersectionObserver)
-  lib/links.ts              CTAs; ficam inertes enquanto a URL não existir
+  lib/links.ts              destinos compartilhados dos CTAs
+  lib/supabase-admin.ts     cliente Supabase exclusivo do servidor
 ```
 
 ## Conteúdo
@@ -44,7 +60,6 @@ seção correspondente degrada sem eles, sem placeholder inventado.
 
 | Campo | Onde | Efeito hoje |
 |---|---|---|
-| `config.whatsappUrl` | `content.ts` | **Bloqueante** — os 7 CTAs renderizam inertes |
 | `about.photos[].src` | A liga (3 fotos) | Slots texturizados |
 | `awards.items[].prize` | Premiação | Card sem a linha do prêmio |
 | `org.roster` / `competitions` | Quem nós somos | Não renderizam |

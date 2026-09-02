@@ -5,7 +5,7 @@ import { CountUp } from "@/components/ui/count-up";
 import { InstagramIcon } from "@/components/ui/instagram-icon";
 import { RevealSection } from "@/components/ui/reveal-section";
 import { org } from "@/content/content";
-import { whatsapp } from "@/lib/links";
+import { registration } from "@/lib/links";
 
 const headingClass =
   "font-display text-[clamp(32px,4.4vw,56px)] leading-[0.9] font-extrabold uppercase";
@@ -108,7 +108,7 @@ export function OrgSection() {
         </div>
 
         <div data-stagger className="mt-[clamp(28px,4vw,42px)] flex justify-center">
-          <Button {...whatsapp()}>
+          <Button {...registration()}>
             {org.cta}
             <ArrowRight width={18} height={18} strokeWidth={1.6} aria-hidden />
           </Button>

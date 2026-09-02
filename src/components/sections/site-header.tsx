@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
+import { ClipboardPenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { whatsapp } from "@/lib/links";
+import { registration } from "@/lib/links";
 import { header, site } from "@/content/content";
 
 export function SiteHeader() {
@@ -33,8 +33,8 @@ export function SiteHeader() {
       </nav>
 
       <div className="flex items-center gap-3">
-        <Button {...whatsapp()} size="sm" className="whitespace-nowrap max-[399px]:px-3">
-          <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
+        <Button {...registration()} size="sm" className="whitespace-nowrap max-[399px]:px-3">
+          <ClipboardPenLine width={18} height={18} strokeWidth={1.6} aria-hidden />
           {header.cta}
         </Button>
       </div>

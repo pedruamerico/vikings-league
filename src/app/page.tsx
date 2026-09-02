@@ -13,6 +13,7 @@ import { AwardsSection } from "@/components/sections/awards-section";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { SiteFooter } from "@/components/sections/site-footer";
+import { RegistrationModal } from "@/components/registration-modal";
 
 export default function Page() {
   return (
@@ -41,6 +42,7 @@ export default function Page() {
       </main>
 
       <SiteFooter />
+      <RegistrationModal />
     </div>
   );
 }

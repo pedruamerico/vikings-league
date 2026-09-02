@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
+import { ClipboardPenLine } from "lucide-react";
 import { InstagramIcon } from "@/components/ui/instagram-icon";
-import { instagram, whatsapp } from "@/lib/links";
+import { instagram, registration } from "@/lib/links";
 import { footer, site } from "@/content/content";
 
 export function SiteFooter() {
@@ -57,10 +57,10 @@ export function SiteFooter() {
               {footer.columns.contact.instagram}
             </a>
             <a
-              {...whatsapp()}
+              {...registration()}
               className="inline-flex items-center gap-2 text-accent-soft transition-colors hover:text-accent-bright"
             >
-              <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
+              <ClipboardPenLine width={18} height={18} strokeWidth={1.6} aria-hidden />
               {footer.columns.contact.whatsapp}
             </a>
           </div>

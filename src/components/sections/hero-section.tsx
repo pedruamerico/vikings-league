@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ClipboardPenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/count-up";
 import { Magnetic } from "@/components/ui/magnetic";
 import { RevealWords } from "@/components/ui/reveal-words";
-import { whatsapp } from "@/lib/links";
+import { registration } from "@/lib/links";
 import { config, hero, site } from "@/content/content";
 
 function Stat({
@@ -98,7 +98,7 @@ export function HeroSection() {
 
         <div className="pointer-events-auto mt-[clamp(16px,2.2vw,24px)] flex flex-wrap justify-center gap-2.5">
           <Magnetic className="flex-[0_1_250px]">
-            <Button {...whatsapp()} size="lg" className="group w-full whitespace-nowrap">
+            <Button {...registration()} size="lg" className="group w-full whitespace-nowrap">
               {hero.primaryCta}
               <ArrowRight
                 width={18}
@@ -110,8 +110,8 @@ export function HeroSection() {
             </Button>
           </Magnetic>
           <Magnetic className="flex-[0_1_250px]">
-            <Button {...whatsapp()} variant="outline" size="lg" className="w-full whitespace-nowrap">
-              <MessageCircle width={18} height={18} strokeWidth={1.6} aria-hidden />
+            <Button {...registration()} variant="outline" size="lg" className="w-full whitespace-nowrap">
+              <ClipboardPenLine width={18} height={18} strokeWidth={1.6} aria-hidden />
               {hero.secondaryCta}
             </Button>
           </Magnetic>

@@ -107,7 +107,7 @@ export type PhotoSlot = {
 };
 
 export const config = {
-  whatsappUrl: "https://chat.whatsapp.com/C0q8uv7gvya9yZKglSUbuv?s=cl&p=a&mlu=0&ilr=0",
+  registrationUrl: "#inscricao",
   instagramUrl: "https://www.instagram.com/vikingsteamesports/",
   showPrice: true,
 } as const;
@@ -162,7 +162,7 @@ export const hero = {
     duration: { value: "1 MÊS", label: "DE COMPETIÇÃO" },
   },
   primaryCta: "GARANTIR MINHA VAGA",
-  secondaryCta: "FALAR NO WHATSAPP",
+  secondaryCta: "PREENCHER INSCRIÇÃO",
 } as const;
 
 export const org = {
@@ -552,7 +552,7 @@ export const finalCta = {
     duration: "1 mês de competição",
   },
   cta: "GARANTIR MINHA VAGA",
-  note: "O contato é feito pelo WhatsApp da organização.",
+  note: "O link do grupo é liberado depois que a inscrição for registrada.",
 } as const;
 
 export const footer = {
@@ -574,7 +574,7 @@ export const footer = {
     contact: {
       label: "CONTATO",
       instagram: "@vikingsteamesports",
-      whatsapp: "WhatsApp",
+      whatsapp: "Inscrição",
     },
   },
   copyright: "© VIKINGS TEAM E-SPORTS",

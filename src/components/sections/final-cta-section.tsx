@@ -1,16 +1,19 @@
 import Image from "next/image";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RevealSection } from "@/components/ui/reveal-section";
 import { RevealWords } from "@/components/ui/reveal-words";
-import { whatsapp } from "@/lib/links";
 import { finalCta, site } from "@/content/content";
+import { registration } from "@/lib/links";
 
 export function FinalCtaSection() {
   return (
-    <RevealSection className="border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(52px,8vw,130px)] vl-texture">
+    <RevealSection
+      id="inscricao"
+      className="scroll-mt-16 border-b border-line bg-bg px-[clamp(18px,3vw,44px)] py-[clamp(52px,8vw,130px)] vl-texture"
+    >
       <div className="mx-auto max-w-[1240px]">
-        <div className="flex flex-wrap items-end gap-[clamp(24px,4vw,64px)]">
+        <div className="flex flex-wrap items-start gap-[clamp(24px,4vw,64px)]">
           <div className="min-w-[min(100%,300px)] flex-[1_1_460px]">
             <Image
               data-stagger
@@ -61,16 +64,17 @@ export function FinalCtaSection() {
                 <span>{finalCta.offer.duration}</span>
               </div>
 
-              <Button {...whatsapp()} size="block" className="mt-[clamp(18px,2.4vw,24px)]">
+              <Button {...registration()} size="block" className="mt-[clamp(18px,2.4vw,24px)]">
                 {finalCta.cta}
                 <ArrowRight width={18} height={18} strokeWidth={1.6} aria-hidden />
               </Button>
 
               <p className="mt-3 flex items-center justify-center gap-2 font-sans text-[12px] text-text-dim">
-                <MessageCircle width={15} height={15} strokeWidth={1.6} aria-hidden />
+                <ShieldCheck width={15} height={15} strokeWidth={1.6} aria-hidden />
                 {finalCta.note}
               </p>
             </div>
+
           </div>
         </div>
       </div>
