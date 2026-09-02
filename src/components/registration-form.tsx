@@ -4,7 +4,7 @@ import { useCallback, useRef, useState, type FormEvent } from "react";
 import Script from "next/script";
 import { ArrowRight, Check, ImagePlus, LoaderCircle } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { positions, shirtSizes } from "@/lib/registration";
+import { positions, shirtSizes, type Position } from "@/lib/registration";
 import { cn } from "@/lib/utils";
 
 type FormStatus =
@@ -63,6 +63,7 @@ export function RegistrationForm() {
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileError, setTurnstileError] = useState(false);
+  const [selectedPositions, setSelectedPositions] = useState<Position[]>([]);
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
   const turnstileWidgetIdRef = useRef<string | null>(null);
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -100,14 +101,33 @@ export function RegistrationForm() {
     window.turnstile?.reset(turnstileWidgetIdRef.current ?? undefined);
   }
 
+  function togglePosition(position: Position) {
+    setSelectedPositions((current) => {
+      if (current.includes(position)) {
+        return current.filter((selected) => selected !== position);
+      }
+
+      return current.length < 3 ? [...current, position] : current;
+    });
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+
+    if (selectedPositions.length !== 3) {
+      setStatus({ state: "error", message: "Escolha três posições em ordem de prioridade." });
+      return;
+    }
+
     setStatus({ state: "submitting" });
 
     try {
       const formData = new FormData(form);
       formData.set("cf-turnstile-response", turnstileToken);
+      selectedPositions.forEach((position, index) => {
+        formData.set(`position${index + 1}`, position);
+      });
       const response = await fetch("/api/registrations", {
         method: "POST",
         body: formData,
@@ -200,9 +220,11 @@ export function RegistrationForm() {
           <input
             className={inputClass}
             name="whatsapp"
-            type="tel"
-            inputMode="tel"
+            type="text"
+            inputMode="numeric"
             autoComplete="tel"
+            maxLength={15}
+            pattern="[0-9]{10,15}"
             placeholder="5512999999999"
             required
           />
@@ -214,7 +236,15 @@ export function RegistrationForm() {
           </select>
         </Field>
         <Field label="Número da camisa">
-          <input className={inputClass} name="shirtNumber" type="number" min={1} max={99} required />
+          <input
+            className={inputClass}
+            name="shirtNumber"
+            type="text"
+            inputMode="numeric"
+            maxLength={2}
+            pattern="[1-9][0-9]?"
+            required
+          />
         </Field>
       </div>
 
@@ -222,19 +252,42 @@ export function RegistrationForm() {
         <legend className="px-2 font-sans text-[11px] font-semibold tracking-[0.12em] text-accent-soft uppercase">
           Posições em ordem de prioridade
         </legend>
-        <div className="mt-1.5 grid gap-3 sm:grid-cols-3">
-          {[1, 2, 3].map((priority) => (
-            <Field key={priority} label={`${priority}ª opção`}>
-              <select className={inputClass} name={`position${priority}`} defaultValue="" required>
-                <option value="" disabled>Selecione</option>
-                {positions.map((position) => (
-                  <option key={position.value} value={position.value}>
-                    {position.label}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          ))}
+        <div className="mt-1.5 flex items-center justify-between gap-4">
+          <p className="text-[11px] text-text-faint">Clique para definir 1ª, 2ª e 3ª opção.</p>
+          <span className="font-display text-lg font-bold text-accent-soft" aria-live="polite">
+            {selectedPositions.length}/3
+          </span>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-5">
+          {positions.map((position) => {
+            const priority = selectedPositions.indexOf(position.value);
+            const isSelected = priority !== -1;
+            const isUnavailable = !isSelected && selectedPositions.length === 3;
+
+            return (
+              <button
+                key={position.value}
+                type="button"
+                aria-pressed={isSelected}
+                disabled={isUnavailable}
+                onClick={() => togglePosition(position.value)}
+                className={cn(
+                  "relative min-h-12 border px-3 py-2 text-left font-sans text-[11px] font-bold tracking-[0.04em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                  isSelected
+                    ? "border-accent bg-accent/16 pr-10 text-white"
+                    : "border-white/12 bg-black/25 text-text-muted hover:border-accent/60 hover:text-white",
+                  isUnavailable && "cursor-not-allowed opacity-40",
+                )}
+              >
+                {position.label}
+                {isSelected ? (
+                  <span className="absolute top-1/2 right-2 flex h-6 w-6 -translate-y-1/2 items-center justify-center bg-accent font-display text-base text-white">
+                    {priority + 1}
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
         </div>
       </fieldset>
 

@@ -11,7 +11,7 @@ export const positions = [
   { value: "ST", label: "CENTROAVANTE" },
 ] as const;
 
-export const shirtSizes = ["PP", "P", "M", "G", "GG", "XGG"] as const;
+export const shirtSizes = ["PP", "P", "M", "G", "GG", "XG", "XGG"] as const;
 
 export type Position = (typeof positions)[number]["value"];
 export type ShirtSize = (typeof shirtSizes)[number];
