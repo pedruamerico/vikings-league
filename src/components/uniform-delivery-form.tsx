@@ -123,7 +123,14 @@ export function UniformDeliveryForm() {
           Jogador
         </legend>
         <Field label="Nome completo" className="sm:col-span-2">
-          <input className={inputClass} name="name" autoComplete="name" minLength={2} maxLength={120} required />
+          <input
+            className={cn(inputClass, "uppercase")}
+            name="name"
+            autoComplete="name"
+            minLength={2}
+            maxLength={120}
+            required
+          />
         </Field>
         <Field label="ID no jogo">
           <input className={inputClass} name="gameId" minLength={2} maxLength={64} required />
@@ -139,16 +146,16 @@ export function UniformDeliveryForm() {
             required
           />
         </Field>
-        <Field label="WhatsApp" hint="país + DDD + número" className="sm:col-span-2">
+        <Field label="WhatsApp" hint="código do país + DDD + número" className="sm:col-span-2">
           <input
             className={inputClass}
             name="whatsapp"
-            type="text"
-            inputMode="numeric"
+            type="tel"
             autoComplete="tel"
-            maxLength={15}
-            pattern="[0-9]{10,15}"
-            placeholder="5512999999999"
+            defaultValue="+55"
+            maxLength={20}
+            pattern="\+?[0-9 \(\)\-]{10,20}"
+            placeholder="+55 21 99999-9999"
             required
           />
         </Field>
@@ -186,7 +193,7 @@ export function UniformDeliveryForm() {
         </Field>
         <Field label="Rua" className="sm:col-span-3">
           <input
-            className={inputClass}
+            className={cn(inputClass, "uppercase")}
             name="street"
             autoComplete="address-line1"
             minLength={2}
@@ -197,14 +204,19 @@ export function UniformDeliveryForm() {
           />
         </Field>
         <Field label="Número">
-          <input className={inputClass} name="addressNumber" maxLength={20} required />
+          <input className={cn(inputClass, "uppercase")} name="addressNumber" maxLength={20} required />
         </Field>
         <Field label="Complemento" hint="opcional" className="sm:col-span-2">
-          <input className={inputClass} name="complement" autoComplete="address-line2" maxLength={120} />
+          <input
+            className={cn(inputClass, "uppercase")}
+            name="complement"
+            autoComplete="address-line2"
+            maxLength={120}
+          />
         </Field>
         <Field label="Bairro" className="sm:col-span-2">
           <input
-            className={inputClass}
+            className={cn(inputClass, "uppercase")}
             name="neighborhood"
             minLength={2}
             maxLength={120}
@@ -215,7 +227,7 @@ export function UniformDeliveryForm() {
         </Field>
         <Field label="Cidade" className="sm:col-span-4">
           <input
-            className={inputClass}
+            className={cn(inputClass, "uppercase")}
             name="city"
             autoComplete="address-level2"
             minLength={2}

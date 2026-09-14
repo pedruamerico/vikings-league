@@ -37,29 +37,34 @@ export function TurnstileWidget({
   const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim();
 
   const render = useCallback(() => {
     if (!siteKey || !containerRef.current || !window.turnstile || widgetIdRef.current) {
       return;
     }
 
-    widgetIdRef.current = window.turnstile.render(containerRef.current, {
-      sitekey: siteKey,
-      action,
-      theme: "dark",
-      language: "pt-br",
-      "response-field": false,
-      callback: (token) => {
-        onTokenChange(token);
-        setHasError(false);
-      },
-      "expired-callback": () => onTokenChange(""),
-      "error-callback": () => {
-        onTokenChange("");
-        setHasError(true);
-      },
-    });
+    try {
+      widgetIdRef.current = window.turnstile.render(containerRef.current, {
+        sitekey: siteKey,
+        action,
+        theme: "dark",
+        language: "pt-br",
+        "response-field": false,
+        callback: (token) => {
+          onTokenChange(token);
+          setHasError(false);
+        },
+        "expired-callback": () => onTokenChange(""),
+        "error-callback": () => {
+          onTokenChange("");
+          setHasError(true);
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      setHasError(true);
+    }
   }, [action, onTokenChange, siteKey]);
 
   useEffect(() => {

@@ -32,7 +32,7 @@ function isShirtSize(value: string): value is ShirtSize {
 }
 
 function validateGroupUrl() {
-  const groupUrl = process.env.WHATSAPP_GROUP_URL;
+  const groupUrl = process.env.WHATSAPP_GROUP_URL?.trim();
   if (!groupUrl?.startsWith("https://chat.whatsapp.com/")) {
     throw new Error("WhatsApp group URL is not configured");
   }

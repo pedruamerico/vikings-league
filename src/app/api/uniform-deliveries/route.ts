@@ -22,6 +22,10 @@ function getText(formData: FormData, key: string) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function toUpperText(value: string) {
+  return value.toLocaleUpperCase("pt-BR");
+}
+
 function isBrazilianState(value: string): value is BrazilianState {
   return brazilianStates.includes(value as BrazilianState);
 }
@@ -56,16 +60,16 @@ export async function POST(request: Request) {
       throw new InvalidDeliveryError("A verificação de segurança expirou. Tente novamente.");
     }
 
-    const name = getText(formData, "name");
+    const name = toUpperText(getText(formData, "name"));
     const gameId = getText(formData, "gameId");
     const whatsapp = getText(formData, "whatsapp").replace(/\D/g, "");
     const discord = getText(formData, "discord").replace(/^@/, "").toLowerCase();
     const postalCode = getText(formData, "postalCode").replace(/\D/g, "");
-    const street = getText(formData, "street");
-    const addressNumber = getText(formData, "addressNumber");
-    const complement = getText(formData, "complement");
-    const neighborhood = getText(formData, "neighborhood");
-    const city = getText(formData, "city");
+    const street = toUpperText(getText(formData, "street"));
+    const addressNumber = toUpperText(getText(formData, "addressNumber"));
+    const complement = toUpperText(getText(formData, "complement"));
+    const neighborhood = toUpperText(getText(formData, "neighborhood"));
+    const city = toUpperText(getText(formData, "city"));
     const state = getText(formData, "state").toUpperCase();
 
     if (!hasLength(name, 2, 120)) {

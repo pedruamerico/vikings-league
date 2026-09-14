@@ -6,7 +6,7 @@ type TurnstileResponse = {
 };
 
 export async function isTurnstileTokenValid(token: string, action: string, requestId: string) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
   if (!secret) {
     throw new Error("Turnstile is not configured");
   }

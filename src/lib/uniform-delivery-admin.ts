@@ -51,7 +51,7 @@ export const uniformDeliveryColumns: {
 ];
 
 function getAdminPassword() {
-  const password = process.env.UNIFORM_DELIVERY_ADMIN_PASSWORD;
+  const password = process.env.UNIFORM_DELIVERY_ADMIN_PASSWORD?.trim();
   if (!password || password.length < 16) {
     throw new Error("Uniform delivery admin password is not configured");
   }
