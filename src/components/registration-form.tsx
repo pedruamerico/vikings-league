@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useRef, useState, type FormEvent } from "react";
-import Script from "next/script";
+import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, ImagePlus, LoaderCircle } from "lucide-react";
+import { TurnstileWidget } from "@/components/turnstile";
 import { buttonVariants } from "@/components/ui/button";
+import { Field, inputClass } from "@/components/ui/form-field";
 import { positions, shirtSizes, type Position } from "@/lib/registration";
 import { cn } from "@/lib/utils";
 
@@ -13,92 +14,15 @@ type FormStatus =
   | { state: "error"; message: string }
   | { state: "success"; groupUrl: string };
 
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (
-        container: HTMLElement,
-        options: {
-          sitekey: string;
-          action: string;
-          theme: "dark";
-          language: string;
-          "response-field": false;
-          callback: (token: string) => void;
-          "expired-callback": () => void;
-          "error-callback": () => void;
-        },
-      ) => string;
-      reset: (widgetId?: string) => void;
-    };
-  }
-}
-
-const inputClass =
-  "min-h-11 w-full border border-white/14 bg-black/25 px-3.5 py-2.5 text-[15px] text-text outline-none transition-colors placeholder:text-text-faint focus:border-accent focus:bg-black/40";
-
-function Field({
-  label,
-  hint,
-  children,
-  className,
-}: {
-  label: string;
-  hint?: string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <label className={cn("block", className)}>
-      <span className="mb-1.5 flex items-baseline justify-between gap-3 font-sans text-[11px] font-semibold tracking-[0.12em] text-text-muted uppercase">
-        {label}
-        {hint ? <span className="text-[10px] tracking-normal text-text-faint normal-case">{hint}</span> : null}
-      </span>
-      {children}
-    </label>
-  );
-}
-
 export function RegistrationForm() {
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const [turnstileError, setTurnstileError] = useState(false);
   const [selectedPositions, setSelectedPositions] = useState<Position[]>([]);
-  const turnstileContainerRef = useRef<HTMLDivElement>(null);
-  const turnstileWidgetIdRef = useRef<string | null>(null);
-  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-
-  const renderTurnstile = useCallback(() => {
-    if (
-      !turnstileSiteKey ||
-      !turnstileContainerRef.current ||
-      !window.turnstile ||
-      turnstileWidgetIdRef.current
-    ) {
-      return;
-    }
-
-    turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
-      sitekey: turnstileSiteKey,
-      action: "registration",
-      theme: "dark",
-      language: "pt-br",
-      "response-field": false,
-      callback: (token) => {
-        setTurnstileToken(token);
-        setTurnstileError(false);
-      },
-      "expired-callback": () => setTurnstileToken(""),
-      "error-callback": () => {
-        setTurnstileToken("");
-        setTurnstileError(true);
-      },
-    });
-  }, [turnstileSiteKey]);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetCount, setTurnstileResetCount] = useState(0);
 
   function resetTurnstile() {
     setTurnstileToken("");
-    window.turnstile?.reset(turnstileWidgetIdRef.current ?? undefined);
+    setTurnstileResetCount((count) => count + 1);
   }
 
   function togglePosition(position: Position) {
@@ -299,28 +223,11 @@ export function RegistrationForm() {
       </div>
 
       <div className="border-t border-line-strong p-[clamp(12px,1.5vw,16px)]">
-        {turnstileSiteKey ? (
-          <>
-            <Script
-              src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-              strategy="afterInteractive"
-              onReady={renderTurnstile}
-              onError={() => setTurnstileError(true)}
-            />
-            <div className="mb-4 flex min-h-[65px] justify-center">
-              <div ref={turnstileContainerRef} />
-            </div>
-            {turnstileError ? (
-              <p className="mb-4 text-center text-sm text-red-200" role="alert">
-                Não foi possível carregar a verificação. Atualize a página e tente novamente.
-              </p>
-            ) : null}
-          </>
-        ) : (
-          <p className="mb-4 border-l-2 border-amber-400 bg-amber-400/8 px-4 py-3 text-sm text-amber-100" role="alert">
-            A verificação de segurança está indisponível. Tente novamente mais tarde.
-          </p>
-        )}
+        <TurnstileWidget
+          action="registration"
+          resetCount={turnstileResetCount}
+          onTokenChange={setTurnstileToken}
+        />
         {status.state === "error" ? (
           <p className="mb-4 border-l-2 border-red-400 bg-red-400/8 px-4 py-3 text-sm text-red-200" role="alert">
             {status.message}
@@ -328,7 +235,7 @@ export function RegistrationForm() {
         ) : null}
         <button
           type="submit"
-          disabled={status.state === "submitting" || !turnstileSiteKey || !turnstileToken}
+          disabled={status.state === "submitting" || !turnstileToken}
           className={cn(
             buttonVariants({ size: "block" }),
             "py-4 disabled:cursor-wait disabled:opacity-60",

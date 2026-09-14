@@ -8,6 +8,7 @@ import {
   type Position,
   type ShirtSize,
 } from "@/lib/registration";
+import { isTurnstileTokenValid } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -16,11 +17,6 @@ const instagramPattern = /^[a-z0-9._]{1,30}$/;
 const whatsappPattern = /^[1-9][0-9]{9,14}$/;
 
 class InvalidRegistrationError extends Error {}
-
-type TurnstileResponse = {
-  success: boolean;
-  action?: string;
-};
 
 function getText(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -44,32 +40,11 @@ function validateGroupUrl() {
 }
 
 async function validateTurnstile(token: string, requestId: string) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    throw new Error("Turnstile is not configured");
-  }
-
   if (!token) {
     throw new InvalidRegistrationError("Conclua a verificação de segurança.");
   }
 
-  const body = new URLSearchParams({
-    secret,
-    response: token,
-    idempotency_key: requestId,
-  });
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body,
-    signal: AbortSignal.timeout(5000),
-  });
-
-  if (!response.ok) {
-    throw new Error("Turnstile verification failed");
-  }
-
-  const result = (await response.json()) as TurnstileResponse;
-  if (!result.success || result.action !== "registration") {
+  if (!(await isTurnstileTokenValid(token, "registration", requestId))) {
     throw new InvalidRegistrationError("A verificação de segurança expirou. Tente novamente.");
   }
 }

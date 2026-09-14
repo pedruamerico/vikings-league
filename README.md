@@ -41,6 +41,8 @@ Somente `NEXT_PUBLIC_TURNSTILE_SITE_KEY` pode ser exposta ao navegador.
 src/
   app/page.tsx              rota única, monta as seções na ordem
   app/api/registrations/    valida, envia a foto e persiste a inscrição
+  app/entregauniforme/      cadastro de endereço para entrega do uniforme
+  app/api/uniform-deliveries/ valida e persiste os dados de entrega
   app/globals.css           design tokens, texturas e keyframes
   content/content.ts        todo o conteúdo textual e datas (fonte única)
   components/sections/      uma seção = um componente
